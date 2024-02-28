@@ -37,9 +37,10 @@ describe('CurrentUser', () => {
     it('should return authenticated user', async () => {
       const req: Request = authMockRequest({}, { username: USERNAME, password: PASSWORD }, authUserPayload) as unknown as Request;
       const res: Response = authMockResponse();
-      jest.spyOn(auth, 'getAuthUserById').mockResolvedValue(authMock);
 
+      jest.spyOn(auth, 'getAuthUserById').mockResolvedValue(authMock);
       await read(req, res);
+
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Authenticated user',
